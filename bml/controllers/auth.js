@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
 const { querySingle } = require('../../dal/data-access');
 const { googleVerify } = require('../helpers/google-verify');
+const jwt = require('jsonwebtoken');
 
 const login = async(req, res = response) => {
     const { email, password } = req.body;
@@ -16,7 +17,8 @@ const login = async(req, res = response) => {
     if (!usuario) {
         res.json({
             status: false,
-            message: 'Email no encontrado'
+            message: 'Email no encontrado',
+            data: null
         })
     }
 
@@ -25,8 +27,8 @@ const login = async(req, res = response) => {
     if (!validPassword) {
         return res.json({
             status: false,
-            message: 'Acceso correcto',
-            data: token
+            message: 'Contraseña incorrecta',
+            data: null
         });
     }
 
@@ -137,11 +139,41 @@ const googleSignIn = async(req, res = response) => {
         res.json({
             status: false,
             message: 'Acceso Denegado',
-            data: token
+            data: null
         });
     }
 }
+
+const loginToken = async(req, res, next) => {
+    const token = req.header('x-token');
+    if (!token) {
+        return res.json({
+            status: false,
+            message: 'No hay token en la petición',
+            data: null
+        });
+    }
+
+    try {
+        const { id } = jwt.verify(token, process.env.JWT_SECRET);
+        req.id = id;
+        const newtoken = await generateJWT(id);
+        return res.json({
+            status: true,
+            message: 'Token válido',
+            data: newtoken
+        })
+        next();
+    } catch (error) {
+        return res.json({
+            status: false,
+            message: 'Token no válido',
+            data: null
+        });
+    }
+};
 module.exports = {
     login,
-    googleSignIn
+    googleSignIn,
+    loginToken
 }

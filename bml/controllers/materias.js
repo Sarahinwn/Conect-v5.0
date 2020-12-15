@@ -14,7 +14,7 @@ const getMaterias = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al consultar las materias',
-            data: materias
+            data: null
         });
     }
 }
@@ -31,14 +31,14 @@ const getMateria = async(req, res) => {
     if (materia) {
         res.json({
             status: true,
-            message: 'Cosulta exitosa',
+            message: 'Consulta exitosa',
             data: materia
         });
     } else {
         res.json({
             status: false,
             message: 'Ocurrio un error al consultar la materia',
-            data: materia
+            data: null
         });
     }
 }
@@ -80,7 +80,7 @@ const addMateria = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al agregar la materia',
-            data: rowsAffected
+            data: null
         });
     }
 
@@ -130,7 +130,7 @@ const updateMateria = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al actualizar la materia',
-            data: rowsAffected
+            data: null
         });
     }
 }
@@ -155,7 +155,7 @@ const deleteMateria = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al eliminar la materia',
-            data: rowsAffected
+            data: null
         });
     }
 }

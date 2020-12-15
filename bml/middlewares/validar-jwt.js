@@ -5,7 +5,8 @@ const validarJWT = (req, res, next) => {
     if (!token) {
         return res.json({
             status: false,
-            message: 'No hay token en la petición'
+            message: 'No hay token en la petición',
+            data: null
         });
     }
 
@@ -16,7 +17,8 @@ const validarJWT = (req, res, next) => {
     } catch (error) {
         return res.json({
             status: false,
-            message: 'Token no válido'
+            message: 'Token no válido',
+            data: null
         });
     }
 }

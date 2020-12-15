@@ -7,10 +7,11 @@ const { validarJWT } = require('../bml/middlewares/validar-jwt');
 const router = Router();
 
 //getall Alumnos
-router.get('/', getAlumnos);
+router.get('/', validarJWT, getAlumnos);
 
 //Add Alumno
 router.post('/', [
+        validarJWT,
         check('nombre', 'El nombre es requerido').not().isEmpty(),
         check('edad', 'La edad es requerido').not().isEmpty(),
         check('sexo', 'El sexo es requerido').not().isEmpty(),
@@ -22,6 +23,7 @@ router.post('/', [
 
 //Update Alumno
 router.put('/:id', [
+    validarJWT,
     check('nombre', 'El nombre es requerido').not().isEmpty(),
     check('edad', 'La edad es requerido').not().isEmpty(),
     check('sexo', 'El sexo es requerido').not().isEmpty(),
@@ -31,9 +33,9 @@ router.put('/:id', [
 ], updateAlumno);
 
 //Delete Alumno
-router.delete('/:id', deleteAlumno);
+router.delete('/:id', validarJWT, deleteAlumno);
 
 //Getbyid
-router.get('/:id', getAlumno);
+router.get('/:id', validarJWT, getAlumno);
 
 module.exports = router;

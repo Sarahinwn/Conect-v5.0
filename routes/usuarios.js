@@ -1,6 +1,6 @@
 const Router = require('express');
 const { check } = require('express-validator');
-const { getUsuarios, addUsuario, deleteUsuario, getUsuario, updateUsuario } = require('../bml/controllers/usuarios');
+const { getUsuarios, addUsuario, deleteUsuario, getUsuario, updateUsuario, updatePassword } = require('../bml/controllers/usuarios');
 const { validarCampos } = require('../bml/middlewares/validar-campos');
 const { validarJWT } = require('../bml/middlewares/validar-jwt');
 const router = Router();
@@ -33,5 +33,11 @@ router.delete('/:id', deleteUsuario);
 
 //Getbyid
 router.get('/:id', getUsuario);
+
+router.put('/updatepass', [
+    check('email', 'El email es requerido').isEmail(),
+    check('password', 'El password es requerido').not().isEmpty(),
+    validarCampos
+], updatePassword);
 
 module.exports = router;

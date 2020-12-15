@@ -4,14 +4,7 @@ const conString = require('./config');
 //Query para todos los select
 //Execute para los 3 faltantes
 const query = async(stpName, sqlParams) => {
-    sql.on('error', err => {
-        console.log(err);
-        res.json({
-            ok: false,
-            msg: 'Error en la configuración de SQL',
-            error: err
-        });
-    });
+
 
     const pool = await sql.connect(conString);
     const req = await pool.request();
@@ -26,14 +19,7 @@ const query = async(stpName, sqlParams) => {
 }
 
 const querySingle = async(stpName, sqlParams) => {
-        sql.on('error', err => {
-            console.log(err);
-            res.json({
-                ok: false,
-                msg: 'Error en la configuración de SQL',
-                error: err
-            });
-        });
+
 
         const pool = await sql.connect(conString);
         const req = await pool.request();
@@ -48,14 +34,7 @@ const querySingle = async(stpName, sqlParams) => {
     }
     //Excecute para los otros 3
 const execute = async(stpName, sqlParams) => {
-    sql.on('error', err => {
-        console.log(err);
-        res.json({
-            ok: false,
-            msg: 'Error en la configuración de SQL',
-            error: err
-        });
-    });
+
 
     const pool = await sql.connect(conString);
     const req = await pool.request();

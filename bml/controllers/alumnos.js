@@ -14,7 +14,7 @@ const getAlumnos = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al consultar los alumnos',
-            data: alumnos
+            data: null
         });
     }
 }
@@ -31,14 +31,14 @@ const getAlumno = async(req, res) => {
     if (alumno) {
         res.json({
             status: true,
-            message: 'Cosulta exitosa',
+            message: 'Consulta exitosa',
             data: alumno
         });
     } else {
         res.json({
             status: false,
             message: 'Ocurrio un error al consultar el alumno',
-            data: alumno
+            data: null
         });
     }
 }
@@ -80,7 +80,7 @@ const addAlumno = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al agregar el alumno',
-            data: rowsAffected
+            data: null
         });
     }
 
@@ -128,7 +128,7 @@ const updateAlumno = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al actualizar el alumno',
-            data: rowsAffected
+            data: null
         });
     }
 }
@@ -153,7 +153,7 @@ const deleteAlumno = async(req, res) => {
         res.json({
             status: false,
             message: 'Ocurrio un error al eliminar el alumno',
-            data: rowsAffected
+            data: null
         });
     }
 }
